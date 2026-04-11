@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "markitdown"
+version = "0.1.0"
+description = "A utility tool for converting various file formats to Markdown"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Fork maintainers" },
+]
+keywords = ["markdown", "conversion", "document", "text"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    " :: Textndependencies = [
+    "ifulsoup4>=4.11.0-normalizer>=3.0",
+    "pathvalidate>=3.0.0",
+]
+
+[project.optional-dependencies]
+pdf = [
+    "pdfminer.six>=20221105",
+]
+docx = [
+    "python-docx>=1.0.0",
+]
+xlsx = [
+    "openpyxl>=3.1.0",
+]
+pptx = [
+    "python-pptx>=0.6.21",
+]
+audio = [
+    "openai>=1.0.0",
+    "pydub>=0.25.1",
+]
+image = [
+    "openai>=1.0.0",
+]
+all = [
+    "pdfminer.six>=20221105",
+    "python-docx>=1.0.0",
+    "openpyxl>=3.1.0",
+    "python-pptx>=0.6.21",
+    "openai>=1.0.0",
+    "pydub>=0.25.1",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pre-commit>=3.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+markitdown = "markitdown.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/microsoft/markitdown"
+Repository = "https://github.com/microsoft/markitdown"
+Issues = "https://github.com/microsoft/markitdown/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/markitdown"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--tb=short"
+
+[tool.coverage.run]
+source = ["src/markitdown"]
+omit = ["tests/*"]
