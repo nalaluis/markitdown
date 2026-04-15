@@ -13,5 +13,5 @@ __license__ = "MIT"
 __all__ = [
     "MarkItDown",
     "DocumentConverter",
-
+    "ConversionResult",
 ]
